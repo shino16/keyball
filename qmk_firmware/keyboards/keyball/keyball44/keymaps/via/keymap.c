@@ -20,6 +20,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+#ifdef COMBO_ENABLE
+enum combos {
+  COMBO_LSFT_BSPC,
+  COMBO_RSFT_BSPC,
+};
+
+const uint16_t PROGMEM combo_lsft_bspc[] = {KC_LSFT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM combo_rsft_bspc[] = {KC_RSFT, KC_BSPC, COMBO_END};
+
+combo_t key_combos[] = {
+[COMBO_LSFT_BSPC] = COMBO(combo_lsft_bspc, KC_DEL),
+[COMBO_RSFT_BSPC] = COMBO(combo_rsft_bspc, KC_DEL),
+};
+#endif
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
