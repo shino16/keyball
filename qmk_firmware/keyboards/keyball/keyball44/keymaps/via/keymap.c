@@ -24,14 +24,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum combos {
   COMBO_LSFT_BSPC,
   COMBO_RSFT_BSPC,
+  COMBO_LSFT_LANG2,
+  COMBO_RSFT_LANG2,
 };
 
 const uint16_t PROGMEM combo_lsft_bspc[] = {KC_LSFT, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM combo_rsft_bspc[] = {KC_RSFT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM combo_lsft_lang2[] = {KC_LSFT, KC_LNG2, COMBO_END};
+const uint16_t PROGMEM combo_rsft_lang2[] = {KC_RSFT, KC_LNG2, COMBO_END};
 
 combo_t key_combos[] = {
 [COMBO_LSFT_BSPC] = COMBO(combo_lsft_bspc, KC_DEL),
 [COMBO_RSFT_BSPC] = COMBO(combo_rsft_bspc, KC_DEL),
+[COMBO_LSFT_LANG2] = COMBO(combo_lsft_lang2, KC_LNG1),
+[COMBO_RSFT_LANG2] = COMBO(combo_rsft_lang2, KC_LNG1),
 };
 #endif
 
