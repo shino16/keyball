@@ -37,5 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
+#define HOLD_ON_OTHER_KEY_PRESS
+
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 1
