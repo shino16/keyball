@@ -130,6 +130,15 @@ static void add_scroll_div(int8_t delta) {
     keyball_set_scroll_div(v < 1 ? 1 : v);
 }
 
+static float fastpow(float a, float b) {
+    union {
+        float f;
+        uint32_t u;
+    } temp = { .f = a };
+    temp.u = (uint32_t)(b * (float)(temp.u - 1064866808) + 1064866808);
+    return temp.f;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Pointing device driver
 
@@ -168,8 +177,10 @@ void pointing_device_driver_set_cpi(uint16_t cpi) {
 
 __attribute__((weak)) void keyball_on_apply_motion_to_mouse_move(keyball_motion_t *m, report_mouse_t *r, bool is_left) {
 #if KEYBALL_MODEL == 61 || KEYBALL_MODEL == 39 || KEYBALL_MODEL == 147 || KEYBALL_MODEL == 44
-    r->x = clip2int8(m->y);
-    r->y = clip2int8(m->x);
+    int16_t speed_squared = m->x * m->x + m->y * m->y;
+    float speed_multiplier = speed_squared >= 2 ? fastpow((float)speed_squared, 0.1f) : 1.0f;
+    r->x = clip2int8((int16_t)(m->y * speed_multiplier));
+    r->y = clip2int8((int16_t)(m->x * speed_multiplier));
     if (is_left) {
         r->x = -r->x;
         r->y = -r->y;
